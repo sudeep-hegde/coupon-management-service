@@ -1,0 +1,22 @@
+#cmmds to start the postgres db container
+# sudo systemctl start docker
+# sudo docker compose -f compose.yaml up -d
+services:
+  db:
+    image: postgres
+    restart: always
+    volumes: #persistence volume for using the created tables and data on restart.
+      - coupon-db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=coupon
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  coupon-db-data:
