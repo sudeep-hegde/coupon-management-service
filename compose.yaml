@@ -1,6 +1,7 @@
 #cmmds to start the postgres db container
 # sudo systemctl start docker
 # sudo docker compose -f compose.yaml up -d
+#  sudo docker stop  coupon-management-service-db-1
 services:
   db:
     image: postgres
@@ -12,7 +13,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - 5432:5432
+      - "5433:5432"
     healthcheck:
       test: [ "CMD", "pg_isready", "-U", "postgres" ]
       interval: 10s
