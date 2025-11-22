@@ -1,28 +1,54 @@
 package com.monkcommerce.couponmanagementservice.rule;
 
+import com.monkcommerce.couponmanagementservice.model.CouponRule;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class BasicRuleEngine implements RuleEngine {
 
-    private final List<RuleEvaluator> rules = List.of(
-            new PercentageDiscountRule(),
-            new FlatDiscountRule()
-            // add more rules later
-    );
+    //fetch from DB.
+//    private final List<RuleEvaluator> rules = List.of(
+//            new PercentageDiscountRule(),
+//            new FlatDiscountRule()
+//            // add more rules later
+//    );
+    private final RuleRegistry ruleRegistry;
 
     @Override
     public RuleResult evaluateRules(RuleEvaluationContext context) {
-        for (RuleEvaluator rule : rules) {
-            RuleResult result = rule.evaluate(context);
 
-            if (result.valid()) {
-                return result; // First matching rule applies
+        // validation rules first
+        for (CouponRule rule : context.rules()) {
+
+            RuleEvaluator evaluator = ruleRegistry.get(rule.getRuleType());
+
+            if (evaluator.isValidationRule()) {
+                RuleResult result = evaluator.evaluate(context, rule.getRuleConfig());
+
+                if (!result.valid()) {
+                    return result;
+                }
+            }
+        }
+        // then discount rule.
+        for (CouponRule rule : context.rules()) {
+
+            RuleEvaluator evaluator = ruleRegistry.get(rule.getRuleType());
+
+            if (evaluator.isDiscountRule()) {
+
+                RuleResult result = evaluator.evaluate(context, rule.getRuleConfig());
+
+                if (result.valid()) {  // && result.discount() > 0
+                    return result; // return first/priority discount rule.
+                }
             }
         }
 
-        return new RuleResult(false, 0, "No applicable coupon rule found");
+        return RuleResult.ok(true, 0, "Coupon applied. No discount rule matched.");
     }
 }

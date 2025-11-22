@@ -5,11 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 import java.util.UUID;
 
 @Entity
@@ -29,14 +26,26 @@ public class Coupon {
     @Enumerated(EnumType.STRING)
     private CouponType type;
 
-    @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition = "jsonb")
-    private Map<String, Object> details;
+//    @JdbcTypeCode(SqlTypes.JSON)
+//    @Column(columnDefinition = "jsonb")
+//    private Map<String, Object> details;
 
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
     private Integer maxUses;
+
+    private Integer perUserLimit;
+
+    @Enumerated(EnumType.STRING)
+    private StackingType stackingType;
+
+    @Builder.Default
+    private Integer usedCount = 0;
+
+    @Builder.Default
+    private Integer reservedCount = 0;
+
 
     @Builder.Default
     private Boolean active = true;

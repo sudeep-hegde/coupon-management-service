@@ -2,10 +2,8 @@ package com.monkcommerce.couponmanagementservice.dto;
 
 import java.util.List;
 
-public record ApplyCouponRequest(
-        String couponCode,
+public record ApplicableCouponRequest(
         String userId,
-        String cartId,
         List<CartItemDto> items
 ) {
 }

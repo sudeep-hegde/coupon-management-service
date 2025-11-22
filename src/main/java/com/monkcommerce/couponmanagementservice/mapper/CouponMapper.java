@@ -11,26 +11,26 @@ public class CouponMapper {
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static Coupon toEntity(CouponRequestDto req) {
-        Coupon c = new Coupon();
-        c.setCode(req.code());
-        c.setType(req.type());
-        c.setDetails(req.details());
-        c.setStartDate(req.startDate());
-        c.setEndDate(req.endDate());
-        c.setMaxUses(req.maxUses());
-//        c.setRepetitionLimit(req.repetitionLimit());
-        c.setActive(req.active());
-        return c;
+       return Coupon.builder()
+               .code(req.code())
+               .type(req.type())
+               .startDate(req.startDate())
+               .endDate(req.endDate())
+               .maxUses(req.maxUses())
+               .perUserLimit(req.perUserLimit())
+               .stackingType(req.stackingType())
+               .active(req.active())
+               .build();
     }
 
-    public static void updateEntity(Coupon c, CouponRequestDto req) {
-        c.setCode(req.code());
-        c.setType(req.type());
-        c.setDetails(req.details());
-        c.setStartDate(req.startDate());
-        c.setEndDate(req.endDate());
-        c.setMaxUses(req.maxUses());
-        c.setActive(req.active());
+    public static void updateEntity(Coupon entity, CouponRequestDto dto) {
+        entity.setType(dto.type());
+        entity.setStartDate(dto.startDate());
+        entity.setEndDate(dto.endDate());
+        entity.setMaxUses(dto.maxUses());
+        entity.setPerUserLimit(dto.perUserLimit());
+        entity.setStackingType(dto.stackingType());
+        entity.setActive(dto.active());
     }
 
     public static CouponResponse toResponse(Coupon c) {
@@ -38,12 +38,11 @@ public class CouponMapper {
                 c.getId(),
                 c.getCode(),
                 c.getType(),
-                c.getDetails(),
                 c.getStartDate(),
                 c.getEndDate(),
                 c.getMaxUses(),
-//                c.getUses(),
-//                c.getRepetitionLimit(),
+                c.getPerUserLimit(),
+                c.getStackingType(),
                 c.getActive(),
                 c.getCreatedAt(),
                 c.getUpdatedAt()

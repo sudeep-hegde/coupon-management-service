@@ -43,8 +43,16 @@ public class GlobalExceptionHandler {
 
         Map<String, String> validationErrors = new HashMap<>();
 
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
+        ex.getBindingResult().getAllErrors().forEach(error -> {
+            String fieldName;
+
+            if (error instanceof FieldError fieldError) {
+                fieldName = fieldError.getField();
+            } else {
+                // For class-level constraints (@ValidDateRange we have added)
+                fieldName = error.getObjectName();
+            }
+
             String message = error.getDefaultMessage();
             validationErrors.put(fieldName, message);
         });
@@ -92,6 +100,17 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiError> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex) {
         String message = "Invalid value for parameter '" + ex.getName() +
                 "': " + ex.getValue() + ". Expected type: " + ex.getRequiredType().getSimpleName();
+        ApiError error = new ApiError(
+                HttpStatus.BAD_REQUEST.value(),
+                message,
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CouponValidationException.class)
+    public ResponseEntity<ApiError> handleCouponValidationException(CouponValidationException ex) {
+        String message = ex.getMessage();
         ApiError error = new ApiError(
                 HttpStatus.BAD_REQUEST.value(),
                 message,

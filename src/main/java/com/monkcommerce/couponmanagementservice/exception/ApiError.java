@@ -12,7 +12,7 @@ public class ApiError {
     private int status;
     private String message;
     private LocalDateTime timestamp;
-    private Map<String, String> validationErrors; // optional
+    private Map<String, String> validationErrors;
 
     public ApiError(int status, String message, LocalDateTime timestamp) {
         this.status = status;
