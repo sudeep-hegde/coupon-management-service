@@ -1,6 +1,5 @@
 package com.monkcommerce.couponmanagementservice.rule;
 
-import com.monkcommerce.couponmanagementservice.model.Coupon;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -9,8 +8,8 @@ import java.util.Map;
 public class FlatDiscountRule implements RuleEvaluator {
 
     @Override
-    public String type() {
-        return "FLAT";
+    public RuleType type() {
+        return RuleType.FLAT;
     }
 
     @Override

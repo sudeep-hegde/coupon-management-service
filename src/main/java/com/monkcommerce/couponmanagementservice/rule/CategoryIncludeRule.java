@@ -8,8 +8,8 @@ import java.util.Map;
 @Component
 public class CategoryIncludeRule implements RuleEvaluator {
     @Override
-    public String type() {
-        return "CATEGORY_INCLUDE";
+    public RuleType type() {
+        return RuleType.CATEGORY_INCLUDE;
     }
 
     @Override

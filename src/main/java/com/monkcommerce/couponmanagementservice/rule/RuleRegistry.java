@@ -8,13 +8,13 @@ import java.util.Map;
 
 @Component
 public class RuleRegistry {
-    private final Map<String, RuleEvaluator> registry = new HashMap<>();
+    private final Map<RuleType, RuleEvaluator> registry = new HashMap<>();
 
     public RuleRegistry(List<RuleEvaluator> evaluators) {
         evaluators.forEach(e -> registry.put(e.type(), e));
     }
 
-    public RuleEvaluator get(String type) {
+    public RuleEvaluator get(RuleType type) {
         return registry.get(type);
     }
 }

@@ -10,7 +10,7 @@ import java.util.Map;
 @Component
 public class BuyXGetYRule implements RuleEvaluator{
     @Override
-    public String type() { return "B_X_G_Y"; }
+    public RuleType type() { return RuleType.B_X_G_Y; }
 
     @Override
     public boolean isDiscountRule() {

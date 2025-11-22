@@ -1,5 +1,6 @@
 package com.monkcommerce.couponmanagementservice.model;
 
+import com.monkcommerce.couponmanagementservice.rule.RuleType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,7 +27,8 @@ public class CouponRule {
     @JoinColumn(name = "coupon_id")
     private Coupon coupon;
 
-    private String ruleType;
+    @Enumerated(EnumType.STRING)
+    private RuleType ruleType;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")

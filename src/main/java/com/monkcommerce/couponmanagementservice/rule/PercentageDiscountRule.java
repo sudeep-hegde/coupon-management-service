@@ -1,6 +1,5 @@
 package com.monkcommerce.couponmanagementservice.rule;
 
-import com.monkcommerce.couponmanagementservice.model.Coupon;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -9,7 +8,7 @@ import java.util.Map;
 public class PercentageDiscountRule implements RuleEvaluator {
 
     @Override
-    public String type() { return "PERCENTAGE"; }
+    public RuleType type() { return RuleType.PERCENTAGE; }
 
     @Override
     public boolean isDiscountRule() {
