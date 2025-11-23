@@ -13,14 +13,13 @@ A scalable, extensible Coupon Management microservice built using **Spring Boot*
 - [Domain Concepts](#domain-concepts)
 - [Database Design](#database-design)
 - [API Endpoints](#api-endpoints)
-- [Rule Engine Design](#rule-engine-design)
+- [Rule Engine Design (CORE functionality)](#rule-engine-design-core-functionality)
 - [Concurrency Handling](#concurrency-handling)
 - [Validation & Security](#validation--security)
 - [Installation & Running](#installation--running)
-- [Environment Variables](#environment-variables)
 - [Example Rule Configurations](#example-rule-configurations)
-- [Future Enhancements](#future-enhancements)
-- [Screenshots (optional)](#screenshots-optional)
+- [Future Enhancements (Recommended Improvements)](#future-enhancements-recommended-improvements)
+- [Assumptions Made During Implementation](#assumptions-made-during-implementation)
 
 ---
 
