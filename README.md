@@ -38,13 +38,13 @@ This system is implemented using a **modular Rule Engine**, making it easily ext
 ---
 
 ## Architecture
+- **Please refer to the following Draw.io link for clear flow diagrams.** (https://app.diagrams.net/#G1otVGMvpKASeYkk192HpianRYzyAK_g_r#%7B%22pageId%22%3A%22kGsRNQq5BOYEQKmcYYxa%22%7D)
 - High level Diagram Depicting usage of Coupon service (diff use-cases).
 <img src="img_5.png" width="400"/>
 - Can be Extended in this manner.
 <img src="img_1.png" width="400"/>
 - Layered Architecture Diagram
 <img src="img_3.png" width="400"/>
-- **Please refer to the following Draw.io link for clear flow diagrams.**(https://app.diagrams.net/#G1otVGMvpKASeYkk192HpianRYzyAK_g_r#%7B%22pageId%22%3A%22kGsRNQq5BOYEQKmcYYxa%22%7D)
 
 ---
 
