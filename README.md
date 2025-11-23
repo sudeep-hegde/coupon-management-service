@@ -44,7 +44,8 @@ This system is implemented using a **modular Rule Engine**, making it easily ext
 <img src="img_1.png" width="400"/>
 - Layered Architecture Diagram
 <img src="img_3.png" width="400"/>
-- **Please refer to the following Draw.io link for clear flow diagrams.** [draw.io](https://app.diagrams.net/#G1otVGMvpKASeYkk192HpianRYzyAK_g_r#%7B%22pageId%22%3A%22kGsRNQq5BOYEQKmcYYxa%22%7D)
+- **Please refer to the following Draw.io link for clear flow diagrams.**(https://app.diagrams.net/#G1otVGMvpKASeYkk192HpianRYzyAK_g_r#%7B%22pageId%22%3A%22kGsRNQq5BOYEQKmcYYxa%22%7D)
+
 ---
 
 ## Tech Stack
