@@ -375,7 +375,7 @@ If a Dockerfile exists in the repo:
     - JWT-based authentication.
     - Role-based access: Admin-only coupon creation & rule management.
     - Prevent unauthorized coupon misuse.
-    - You can refer to my user-service repo for clean authentication and authorization implementations.
+    - You can refer to my  [user-service](https://github.com/sudeep-hegde/user-service) repo for clean authentication and authorization implementations.
 
 - **Secure Secrets Management**
     - Vault / AWS Secrets Manager / Kubernetes Secrets for:
