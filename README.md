@@ -242,7 +242,8 @@ If a Dockerfile exists in the repo:
 ### 5. Access the Application
 - Runs on
     - http://localhost:8080
-- Have attached postman collection, please import and try testing the endpoints.
+- Have attached postman collection(**[postman_collection.json](postman_collection.json)**), please import and try testing the endpoints.
+- **NOTE** Please execute the sql queries from **[insert-queries.sql](insert-queries.sql)** before executing apis from the collection.
 ---
 ## Example Rule Configurations
 - Percentage rule

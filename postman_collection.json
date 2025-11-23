@@ -1,0 +1,773 @@
+{
+	"info": {
+		"_postman_id": "19e83495-5aa6-4f2e-ae56-d6e03b68937e",
+		"name": "Postman Collection",
+		"description": "ALL APIs.  \n(Before executing please execute the sql queries in insert-queries.sql in from the repo).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21925354"
+	},
+	"item": [
+		{
+			"name": "Coupon CRUD",
+			"item": [
+				{
+					"name": "Create Coupon - Valid",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"code\": \"NEWYEAR255\",\n  \"type\": \"PRODUCT_WISE\",\n  \"startDate\": \"2025-01-01T00:00:00\",\n  \"endDate\": \"2025-12-31T23:59:59\",\n  \"maxUses\": 100,\n  \"perUserLimit\": 2,\n  \"stackingType\": \"STACKABLE\",\n  \"active\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Coupon - Duplicate Code (Should Fail)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"code\": \"NEWYEAR255\",\n  \"type\": \"PRODUCT_WISE\",\n  \"startDate\": \"2025-01-01T00:00:00\",\n  \"endDate\": \"2025-12-31T23:59:59\",\n  \"maxUses\": 100,\n  \"perUserLimit\": 2,\n  \"stackingType\": \"STACKABLE\",\n  \"active\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Coupon - Invalid Date Range",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"code\": \"INVALIDDATE\",\n  \"type\": \"CART_WISE\",\n  \"startDate\": \"2025-12-31T23:59:59\",\n  \"endDate\": \"2025-01-01T00:00:00\",\n  \"maxUses\": 50,\n  \"perUserLimit\": 1,\n  \"stackingType\": \"EXCLUSIVE\",\n  \"active\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Coupon by ID - Valid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons/{{couponId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"{{couponId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Coupon - Invalid ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons/00000000-0000-0000-0000-000000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Coupons - Pagination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons?page=0&size=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Coupon - Valid",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"code\": \"NEWYEAR50\",\n  \"type\": \"PRODUCT_WISE\",\n  \"startDate\": \"2025-01-01T00:00:00\",\n  \"endDate\": \"2025-12-31T23:59:59\",\n  \"maxUses\": 200,\n  \"perUserLimit\": 1,\n  \"stackingType\": \"STACKABLE\",\n  \"active\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons/{{couponId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"{{couponId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Coupon - Valid",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons/{{couponId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"{{couponId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Coupon Apply",
+			"item": [
+				{
+					"name": "Get All Coupons (page=0,size=10) Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/coupons?page=0&size=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"coupons"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Coupon - NEWYEAR50 Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/coupons/11111111-1111-1111-1111-111111111111",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"11111111-1111-1111-1111-111111111111"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply Coupon - NEWYEAR50 (percentage) - happy path Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"couponCode\": \"NEWYEAR50\",\n  \"userId\": \"U_1\",\n  \"cartId\": \"C_1\",\n  \"items\": [\n    { \"productId\": \"P-A\", \"quantity\": 2, \"price\": 1000.0, \"category\": \"electronics\" },\n    { \"productId\": \"P-B\", \"quantity\": 1, \"price\": 200.0, \"category\": \"accessories\" }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/coupons/apply",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply Coupon - SHOES20 (product-wise flat) - fail (coupon already applied).) Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"couponCode\": \"SHOES20\",\n  \"userId\": \"U_100\",\n  \"cartId\": \"CART_100\",\n  \"items\": [\n    { \"productId\": \"P-SHOE\", \"quantity\": 1, \"price\": 1000.0, \"category\": \"shoes\" }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/coupons/apply",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply Coupon - BUY2GET1 (BXGY) where free product present - happy path Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"couponCode\": \"BUY2GET1\",\n  \"userId\": \"U_2\",\n  \"cartId\": \"C_2\",\n  \"items\": [\n    { \"productId\": \"P1\", \"quantity\": 2, \"price\": 200.0, \"category\": \"toys\" },\n    { \"productId\": \"P2\", \"quantity\": 1, \"price\": 150.0, \"category\": \"toys\" }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/coupons/apply",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply Coupon - BUY2GET1 (BXGY) where free product NOT present (cart-service should add) - returns freeItems Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"couponCode\": \"BUY2GET1\",\n  \"userId\": \"U_3\",\n  \"cartId\": \"C_3\",\n  \"items\": [\n    { \"productId\": \"P1\", \"quantity\": 4, \"price\": 200.0, \"category\": \"toys\" }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/coupons/apply",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply Coupon - EXPIRED (should fail) Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"couponCode\": \"OLDCOUPON\",\n  \"userId\": \"U_10\",\n  \"cartId\": \"C_10\",\n  \"items\": [\n    { \"productId\": \"PA\", \"quantity\": 1, \"price\": 100.0, \"category\": \"misc\" }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/coupons/apply",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply Coupon - ALREADY EXHAUSTED (should fail) Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"couponCode\": \"ONEUSE\",\n  \"userId\": \"U_11\",\n  \"cartId\": \"C_11\",\n  \"items\": [\n    { \"productId\": \"PZ\", \"quantity\": 1, \"price\": 50.0, \"category\": \"misc\" }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/coupons/apply",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply Coupon - PerApply Coupon (user U_100 cart CART_101) Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"couponCode\": \"SHOES20\",\n  \"userId\": \"U_100\",\n  \"cartId\": \"CART_101\",\n  \"items\": [\n    { \"productId\": \"P-SHOE\", \"quantity\": 1, \"price\": 1000.0, \"category\": \"shoes\" }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/coupons/apply",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply Coupon - Invalid code (should return 404) Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"couponCode\": \"NO_SUCH_COUPON\",\n  \"userId\": \"U_1\",\n  \"cartId\": \"C_99\",\n  \"items\": [\n    { \"productId\": \"X\", \"quantity\": 1, \"price\": 100.0, \"category\": \"misc\" }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/coupons/apply",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Applicable Coupons",
+			"item": [
+				{
+					"name": "Get Applicable Coupons",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": \"U_10\",\n  \"items\": [\n    {\"productId\": \"P1\", \"quantity\": 2, \"price\": 500.0, \"category\": \"shoes\"},\n    {\"productId\": \"P2\", \"quantity\": 1, \"price\": 200.0, \"category\": \"shirts\"}\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons/applicable",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"applicable"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Coupon Rules CRUD",
+			"item": [
+				{
+					"name": "Create Rule - Percentage",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"couponId\": \"{{couponId}}\",\n \"ruleType\": \"PERCENTAGE\",\n \"ruleConfig\": {\"percent\": 20, \"maxDiscount\": 200},\n \"priority\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons/rules",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"rules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Rule - duplicate Code (shd fail)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"couponId\": \"{{couponId}}\",\n \"ruleType\": \"PERCENTAGE\",\n \"ruleConfig\": {\"percent\": 20, \"maxDiscount\": 200},\n \"priority\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons/rules",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"rules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Rule - Flat",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"couponId\": \"{{couponId}}\",\n \"ruleType\": \"FLAT\",\n \"ruleConfig\": {\"amount\": 150},\n \"priority\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons/rules",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"rules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Rule - BXGY",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"couponId\": \"{{couponId}}\",\n \"ruleType\": \"B_X_G_Y\",\n \"ruleConfig\": {\n   \"buy\": {\"productId\": \"P1\", \"qty\": 2},\n   \"get\": {\"productId\": \"P2\", \"qty\": 1}\n },\n \"priority\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons/rules",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"rules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Rules for Coupon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons/rules/{{couponId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"rules",
+								"{{couponId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Rule",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"couponId\": \"{{couponId}}\",\n \"ruleType\": \"PERCENTAGE\",\n \"ruleConfig\": {\"percent\": 25, \"maxDiscount\": 300},\n \"priority\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons/rules/{{ruleId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"rules",
+								"{{ruleId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Rule",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/coupons/rules/{{ruleId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"rules",
+								"{{ruleId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "couponId",
+			"value": ""
+		},
+		{
+			"key": "ruleId",
+			"value": ""
+		}
+	]
+}
