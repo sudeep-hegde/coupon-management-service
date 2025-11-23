@@ -191,24 +191,59 @@ WHERE id = :id AND used_count < max_uses;
 - and others...
 
 ## Installation & Running
-- clone the project
-- Start postgreSQL container
-  - ```docker compose up -d ```
-- Build & Run Spring boot app
-  - ```shell
-    mvn clean install
-    mvn spring-boot:run 
-    ```
-- Planning to dockerize in next version.
-  - If Dockerfile exists just run
-    - ``` docker run ```
-- Runs on 
-  - http://localhost:8080
-- **Note:**
-  - postgres configs and creds are hardcoded in compose.yaml
-  - Other application configs are present in application.yaml
-- Have attached postman collection, please import and try testing the endpoints.
+Follow these steps to set up and run the **APP**.
 
+---
+### 1. Clone the Repository
+
+```sh
+git clone https://github.com/sudeep-hegde/coupon-management-service.git
+cd coupon-management-service
+```
+### 2. Start PostgreSQL using Docker
+The project includes a ready-to-use compose.yaml.
+```sh
+  docker compose up -d
+```
+This will:
+- Start PostgreSQL
+- Expose it on localhost:5433
+- Create a persistent volume (coupon-db-data)
+### DB Credentials (as per compose.yaml):
+
+| Property  | Value                        |
+|---------|---------------------------------|
+| Host    | localhost      |
+| Port   | 5433     |
+| DB Name   | coupon    |
+| User    | postgres   |
+| Password   | postgres     |
+
+### 3. Build & Run Spring Boot App (Locally)
+Option A — Run using Maven
+```sh
+  mvn clean install
+  mvn spring-boot:run
+```
+
+### 4. Run as Docker Container (App)
+If a Dockerfile exists in the repo:
+- Build the Docker image:
+    ```sh
+      docker build -t coupon-service .
+    ```
+- Run the container:
+   ```sh
+      docker run -p 8080:8080 \
+     --name coupon-service \
+     --network=coupon-management-service_default \
+     coupon-service
+    ```
+### 5. Access the Application
+- Runs on
+    - http://localhost:8080
+- Have attached postman collection, please import and try testing the endpoints.
+---
 ## Example Rule Configurations
 - Percentage rule
   - ```json

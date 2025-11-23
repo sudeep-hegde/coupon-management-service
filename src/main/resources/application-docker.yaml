@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/coupon
-#    url: jdbc:postgresql://db:5433/coupon
+    #    url: jdbc:postgresql://localhost:5433/coupon
+    url: jdbc:postgresql://db:5432/coupon
     username: postgres
     password: postgres
 
