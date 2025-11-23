@@ -39,11 +39,12 @@ This system is implemented using a **modular Rule Engine**, making it easily ext
 
 ## Architecture
 - High level Diagram Depicting usage of Coupon service (diff use-cases).
-<img src="img.png" width="400"/>
+<img src="img_5.png" width="400"/>
 - Can be Extended in this manner.
 <img src="img_1.png" width="400"/>
 - Layered Architecture Diagram
 <img src="img_3.png" width="400"/>
+- **Please refer to the following Draw.io link for clear flow diagrams.** [draw.io](https://app.diagrams.net/#G1otVGMvpKASeYkk192HpianRYzyAK_g_r#%7B%22pageId%22%3A%22kGsRNQq5BOYEQKmcYYxa%22%7D)
 ---
 
 ## Tech Stack
@@ -72,7 +73,7 @@ This system is implemented using a **modular Rule Engine**, making it easily ext
 ### ✔ Prevents double usage & fraud
 ### ✔ Concurrency-safe `usedCount` updates
 ### ✔ Atomic usage tracking
-### ✔ JSONB rule configs (no redeploy/release req. for rule changes)
+### ✔ JSONB rule configs (no redeployment/release required for rule changes)
 
 ---
 
@@ -353,7 +354,7 @@ If a Dockerfile exists in the repo:
 ---
 
 ### DevOps & Deployment
-- **Dockerizing the Service**
+- **Dockerizing the Service** (Completed...)
     - Add `Dockerfile` (multi-stage).
     - Add `docker-compose.yaml` for local development.
 
@@ -364,6 +365,7 @@ If a Dockerfile exists in the repo:
 - **OpenAPI/Swagger Documentation**
     - Auto-generated interactive API docs.
     - Helpful for developers & testers.
+    - Attached postman collection(**[postman_collection.json](postman_collection.json)**) for testing as of now.
 
 ---
 
@@ -372,6 +374,7 @@ If a Dockerfile exists in the repo:
     - JWT-based authentication.
     - Role-based access: Admin-only coupon creation & rule management.
     - Prevent unauthorized coupon misuse.
+    - You can refer to my user-service repo for clean authentication and authorization implementations.
 
 - **Secure Secrets Management**
     - Vault / AWS Secrets Manager / Kubernetes Secrets for:
@@ -406,6 +409,7 @@ If a Dockerfile exists in the repo:
     - MockMVC tests for controllers.
     - Rule engine unit tests.
     - Testcontainers for PostgreSQL integration tests.
+    - Unit test cases implemented for one of the service class([CouponApplyServiceImplTest.java](src/test/java/com/monkcommerce/couponmanagementservice/service/CouponApplyServiceImplTest.java)) (few TCs only implemented due to time constraint).
 
 - **Feature Flag System**
     - Enable/disable certain rules or coupons dynamically.
